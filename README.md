@@ -2,4 +2,4 @@
 API Devel for Lymphoblast Server (Image Classification)
 
 
-Use face detection instead. Testing model using Harcascade. Flask API in progress
+Use face detection for trial. Testing model using Harcascade. Flask API in progress
