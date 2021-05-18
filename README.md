@@ -2,4 +2,4 @@
 API Devel for Lymphoblast Server (Image Classification)
 
 
-Use digit dataset instead. Testing model using MLP. Fast API in progress
+Use face detection instead. Testing model using Harcascade. Flask API in progress
