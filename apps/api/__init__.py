@@ -15,19 +15,12 @@ for d in [UPLOAD_DIR, RESULTS_DIR, EXTRACT_DIR]:
 
 app = Flask(__name__)
 app.secret_key = b'/R\x99.\xda\xba\x9dD\\.C)f4\x19\x1b\x8b\xa7\x12\xd7\x07\xed\x13\x90'
-app.config['OUTPUTS_DIR'] = EXTRACT_DIR # store the result
+app.config['EXTRACT_DIR'] = EXTRACT_DIR # store the result
 app.config['UPLOAD_FOLDER'] = UPLOAD_DIR # directly from the source
+app.config['RESULTS_DIR'] = RESULTS_DIR
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/storage/uploads/<filename>')
-def serve_upload(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-@app.route('/storage/results/<filename>')
-def serve_extract(filename):
-	return send_from_directory(app.config['OUTPUTS_DIR'], filename)
 
 from .route import *
 from .cv.route import *

@@ -1,43 +1,35 @@
 import os
 from flask import send_from_directory, request, url_for
 from werkzeug.utils import secure_filename
-from api import app, allowed_file, OUTPUTS_DIR, RESULTS_DIR 
+from api import app, allowed_file, EXTRACT_DIR, RESULTS_DIR 
+from api.utils import handle_upload
 from .utils import load_image, faces_extract
 
 @app.route('/api/opencv', methods=['POST'])
-def handle_cv_upload():
+def cv_upload():
 	if request.method == 'POST':
 
-		if 'file' not in request.files:
-			return {"detail": "No file part"}, 400
+		## save to upload directory
+		file = request.files.get("file")
+		dest_folder = app.config['UPLOAD_FOLDER']
+		dest_len = len(os.listdir(dest_folder))
+		response, status = handle_upload(file, dest_folder, dest_len, return_img_path=True)
+		
+		## load image from directory path
+		img = load_image(response)
+		
+		## save to extract and result directory
+		extract_paths, result_paths = faces_extract(img, save=True, extract=EXTRACT_DIR, result=RESULTS_DIR)
+		truncated_extract_path = []
+		for path in extract_paths:
+			relative_path = path.replace(EXTRACT_DIR, '')
+			extract_url = url_for('serve_extract', filename=relative_path)
+			truncated_extract_path.append(extract_url) ## relative path to the root
 
-		file = request.files['file']
-		if file.filename == '':
-			return {"detail": "No image selected for uploading"}, 400
+		temp_result_path = result_paths.replace(RESULTS_DIR, '')
+		truncated_result_path = url_for('serve_result', filename=temp_result_path)
 
-		if file and allowed_file(file.filename):
-			filename = secure_filename(file.filename) # security purpose
-			_, ext = os.path.splitext(filename) # take extension
-
-			destination_folder = app.config['UPLOAD_FOLDER']
-			new_filename = f"{len(os.listdir(destination_folder)) + 1}{ext}" # set new filename
-
-			save_path = os.path.join(destination_folder, new_filename)
-
-			file.save(save_path)
-
-			img = load_image(save_path)
-			
-			paths = faces_extract(img, save=True, destination=OUTPUTS_DIR, result=RESULTS_DIR)
-			response_paths = []
-			for path in paths:
-				relative_path = path.replace(OUTPUTS_DIR, '')
-				extract_url = url_for('serve_extract', filename=relative_path)
-				response_paths.append(extract_url)
-
-			return {"paths": response_paths}, 201
-		else:
-			return {"detail": "Allowed image types are - png, jpg, jpeg"}, 401
+		return {"extract_path": truncated_extract_path, "result_path":truncated_result_path}, 201
 
 		
 		

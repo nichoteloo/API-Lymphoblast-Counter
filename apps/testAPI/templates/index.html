@@ -2,12 +2,11 @@
 <head>
 <title>Python Flask Upload and display image</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
 <p><h1 align="center">Python Flask Upload and display image</h1></p>
 <div class="container">
-<div class="row">
+<div class="row" align="center" >
     <h2>Select a file to upload</h2>
     <p>
         {% with messages = get_flashed_messages() %}
@@ -25,10 +24,16 @@
             <img src="{{ url_for('display_image', filename=filename) }}">
         </div>
     {% endif %}
-    <form method="POST" action="/api/upload" enctype="multipart/form-data">
+    <form id="form1" method="POST" action="/test" enctype="multipart/form-data">
         <dl>
             <p>
-                <input type="file" name="file" class="form-control" autocomplete="off" required>
+                <input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;" required>
+            </p>
+            <p>
+                <label for="file" style="cursor: pointer;">Upload Image</label>
+            </p>
+            <p>
+                <img id="output" width="300" />
             </p>
         </dl>
         <p>
@@ -37,5 +42,13 @@
     </form>
 </div>
 </div>
+<!-- <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
 </body>
 </html>
