@@ -1,5 +1,5 @@
 import os
-from flask import send_from_directory, flash, request, redirect, url_for, render_template
+from flask import send_from_directory, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from api import app, allowed_file
 

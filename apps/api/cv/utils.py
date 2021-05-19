@@ -9,8 +9,10 @@ import numpy as np
 def get_cascade(cascade='haarcascade_frontalface_default.xml'):
 	return os.path.join(cv2.data.haarcascades, cascade)
 
-def load_image():
+def load_image(image_path):
 	frame = cv2.imread(image_path)
+	# frame = cv2.cv.LoadImage(image_path)
+	import pdb; pdb.set_trace()
 	return frame
 
 def faces_extract(frame, save=True, destination=None):
