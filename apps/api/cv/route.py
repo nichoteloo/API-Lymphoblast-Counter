@@ -1,7 +1,7 @@
 import os
 from flask import send_from_directory, request, url_for
 from werkzeug.utils import secure_filename
-from api import app, allowed_file, OUTPUTS_DIR
+from api import app, allowed_file, OUTPUTS_DIR, RESULTS_DIR 
 from .utils import load_image, faces_extract
 
 @app.route('/api/opencv', methods=['POST'])
@@ -28,13 +28,14 @@ def handle_cv_upload():
 
 			img = load_image(save_path)
 			
-			paths = faces_extract(img, save=True, destination=OUTPUTS_DIR)
+			paths = faces_extract(img, save=True, destination=OUTPUTS_DIR, result=RESULTS_DIR)
 			response_paths = []
 			for path in paths:
 				relative_path = path.replace(OUTPUTS_DIR, '')
-				live_url = url_for('serve_result', relative_path)
-				response_paths.append(live_url)
-			return response_paths, 200
+				extract_url = url_for('serve_extract', filename=relative_path)
+				response_paths.append(extract_url)
+
+			return {"paths": response_paths}, 201
 		else:
 			return {"detail": "Allowed image types are - png, jpg, jpeg"}, 401
 
