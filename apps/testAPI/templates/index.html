@@ -19,18 +19,14 @@
           {% endif %}
         {% endwith %}
     </p>
-    {% if filename %}
-        <div>
-            <img src="{{ url_for('display_image', filename=filename) }}">
-        </div>
-    {% endif %}
-    <form id="form1" method="POST" action="/test" enctype="multipart/form-data">
+    
+    <form id="form1" method="POST" action="/" enctype="multipart/form-data">
         <dl>
             <p>
-                <input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;" required>
+                <input type="file"  accept="image/*" name="file" id="file" onchange="loadFile(event)" style="display: none;" required>
             </p>
             <p>
-                <label for="file" style="cursor: pointer;">Upload Image</label>
+                <label for="file" style="cursor: pointer; width:100px;height:22px;border:1px solid #000;">Upload Image</label>
             </p>
             <p>
                 <img id="output" width="300" />
@@ -40,10 +36,14 @@
             <input type="submit" value="Submit" class="btn btn-info">
         </p>
     </form>
+
+    {% if filename %}
+        <div>
+            <img src="{{ url_for('display_image', filename=filename) }}">
+        </div>
+    {% endif %}
 </div>
 </div>
-<!-- <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
     var loadFile = function(event) {
 	var image = document.getElementById('output');

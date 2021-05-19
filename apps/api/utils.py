@@ -20,7 +20,7 @@ def handle_upload(file, dest, dest_len=None, save=True, return_img_path=False):
             file.save(save_path)
 
             if return_img_path == True:
-                return save_path, 5211
+                return {"saved": True}, save_path, 5211
 
             return {"saved": True}, 201
     else:

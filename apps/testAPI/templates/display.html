@@ -1,0 +1,49 @@
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Display Page</title>
+  </head>
+
+  <body>
+    <h1>Display Image Page</h1>
+    <p>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </p>
+
+    {% if upload_path %} 
+    <div align="center">
+      <h3>Uploaded Image</h3>
+      <img src="{{ upload_path }}" width="500"/>
+    </div>
+    {% endif %}
+
+    {% if result_path %} 
+    <div align="center">
+      <h3>Result Image</h3>
+      <img src="{{ result_path }}" width="500"/>
+    </div>
+    {% endif %}
+
+    {% if extract_paths %} 
+      <div>
+        <h3>Extract Image</h3>
+        {% for extract_path in extract_paths %}
+        <img src="{{ extract_path }}" />
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <a href="/">Home</a>
+  </body>
+</html>
