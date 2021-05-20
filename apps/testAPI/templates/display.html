@@ -9,6 +9,7 @@
 
   <body>
     <h1>Display Image Page</h1>
+    <a href="/" align="align-right">Back Home</a>
     <p>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -37,13 +38,13 @@
 
     {% if extract_paths %} 
       <div>
-        <h3>Extract Image</h3>
+        <h3>Extracted Image</h3>
         {% for extract_path in extract_paths %}
-        <img src="{{ extract_path }}" />
+        <img src="{{ extract_path }}" width="100"/>
         {% endfor %}
       </div>
     {% endif %}
 
-    <a href="/">Home</a>
+    
   </body>
 </html>

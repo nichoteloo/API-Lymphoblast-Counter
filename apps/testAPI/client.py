@@ -42,7 +42,6 @@ def display():
     upload_path = BASE_URL + messages['upload_path']
     result_path = BASE_URL + messages['result_path']
     extract_paths = list(map(BASE_URL.__add__, messages['extract_path']))
-    # import pdb; pdb.set_trace()
     return render_template('display.html', upload_path=upload_path, extract_paths=extract_paths, result_path=result_path)
     
 if __name__ == "__main__":

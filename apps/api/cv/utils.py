@@ -28,7 +28,7 @@ def faces_extract(frame, save=True, extract=None, result=None):
 	final_dest = None
 	if extract is not None:
 		extract_len = len(os.listdir(extract)) + 1
-		final_dest = os.path.join(extract, f"Extract {extract_len}")
+		final_dest = os.path.join(extract, f"Extract_{extract_len}")
 		os.makedirs(final_dest, exist_ok=True)
 
 	## bounding box coordinate checking
@@ -47,4 +47,4 @@ def faces_extract(frame, save=True, extract=None, result=None):
 	result_paths = os.path.join(result, f"{result_len}.jpg")
 	status = cv2.imwrite(result_paths, frame)
 
-	return extract_paths, result_paths
+	return extract_paths, result_paths, extract_len

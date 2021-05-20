@@ -19,11 +19,11 @@ def cv_upload():
 		img = load_image(img_path)
 		
 		## save to extract and result directory
-		extract_paths, result_paths = faces_extract(img, save=True, extract=EXTRACT_DIR, result=RESULTS_DIR)
+		extract_paths, result_paths, extract_len = faces_extract(img, save=True, extract=EXTRACT_DIR, result=RESULTS_DIR)
 		truncated_extract_path = []
 		for path in extract_paths:
-			relative_path = path.replace(EXTRACT_DIR, '')
-			extract_url = url_for('serve_extract', filename=relative_path)
+			filename = path.replace(EXTRACT_DIR + f'/Extract_{extract_len}', '')
+			extract_url = url_for('serve_extract', extract_len=extract_len, filename=filename)
 			truncated_extract_path.append(extract_url) ## relative path to the root
 
 		temp_upload_path = img_path.replace(UPLOAD_DIR, '')

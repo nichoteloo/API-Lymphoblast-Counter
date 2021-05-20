@@ -11,10 +11,9 @@ def serve_upload(filename):
 def serve_result(filename):
     return send_from_directory(app.config['RESULTS_DIR'], filename)
 
-@app.route('/storage/extract/<filename>')
-def serve_extract(filename):
-    import pdb; pdb.set_trace()
-    return send_from_directory(app.config['EXTRACT_DIR'], 'Extract%201', filename)
+@app.route('/storage/extract/<extract_len>/<filename>')
+def serve_extract(extract_len, filename):
+    return send_from_directory(app.config['EXTRACT_DIR'], f'Extract_{extract_len}/' + filename, mimetype='image/jpg')
 
 
 
