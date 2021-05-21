@@ -14,7 +14,7 @@ for d in [UPLOAD_DIR, RESULTS_DIR, EXTRACT_DIR]:
 	os.makedirs(d, exist_ok=True)
 
 app = Flask(__name__)
-app.secret_key = b'/R\x99.\xda\xba\x9dD\\.C)f4\x19\x1b\x8b\xa7\x12\xd7\x07\xed\x13\x90'
+app.secret_key = 'E9Sdkjg3wUgngckGVkNjJLXWgHVFtlTN'
 app.config['EXTRACT_DIR'] = EXTRACT_DIR # store the result
 app.config['UPLOAD_FOLDER'] = UPLOAD_DIR # directly from the source
 app.config['RESULTS_DIR'] = RESULTS_DIR

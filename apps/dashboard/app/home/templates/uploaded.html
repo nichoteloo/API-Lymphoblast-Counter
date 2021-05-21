@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %} {% block title %} Upload Image {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="pcoded-content">
+  <div class="pcoded-inner-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h5 class="m-b-10">Upload Image</h5>
+            </div>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/"><i class="feather icon-home"></i></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:">Input Image</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:">Upload Image</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="main-body">
+      <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h5>Upload Image</h5>
+              </div>
+              <div class="card-body">
+                <h5>Select an image file to upload</h5>
+                <p>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
+                </p>
+                <hr />
+                <div class="row">
+                  <div class="col-md-6">
+                      <form id="form1" method="POST" action="/upload.html" enctype="multipart/form-data">
+                        <dl>
+                            <p>
+                                <input type="file"  accept="image/*" name="file" id="file" onchange="loadFile(event)" style="display: none;" required>
+                            </p>
+                            <p>
+                                <label for="file" style="cursor: pointer; width:100px;height:22px;border:1px solid #000;">Upload Image</label>
+                            </p>
+                            <p>
+                                <img id="output" width="300" />
+                            </p>
+                        </dl>
+                        <p>
+                            <input type="submit" value="Submit" class="btn btn-primary">
+                        </p>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- [ Main Content ] end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
+{% endblock javascripts %}

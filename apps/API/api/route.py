@@ -15,9 +15,16 @@ def serve_result(filename):
 def serve_extract(extract_len, filename):
     return send_from_directory(app.config['EXTRACT_DIR'], f'Extract_{extract_len}/' + filename, mimetype='image/jpg')
 
-
-
-
+@app.route('/api/upload', methods=['POST'])
+def api_upload():
+    if request.method == "POST":
+        ## save to upload directory
+        file = request.files.get("file")
+        dest_folder = app.config['UPLOAD_FOLDER']
+        dest_len = len(os.listdir(dest_folder))
+        response, img_path, status = handle_upload(file, dest_folder, dest_len, return_img_path=True)
+        return {"saved": response['saved'], "img_path":img_path}, 201
+    return {"detail":"Upload failed"}, 400
 
 
 

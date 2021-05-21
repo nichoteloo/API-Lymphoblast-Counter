@@ -4,8 +4,8 @@ from threading import Thread
 from flask import Flask, redirect, render_template, request, flash, sessions, url_for
 
 app = Flask(__name__)
-app.secret_key = b'/R\x99.\xda\xba\x9dD\\.C)f4\x19\x1b\x8b\xa7\x12\xd7\x07\xed\x13\x90'
-BASE_URL = 'http://127.0.0.1:5000'
+app.secret_key = 'E9Sdkjg3wUgngckGVkNjJLXWgHVFtlTN'
+BASE_URL = 'http://127.0.0.1:8000'
 
 @app.route('/')
 def home():
@@ -14,27 +14,48 @@ def home():
 def send_image_req(url,data):
     my_img = {'file': open(data, 'rb')}
     response = requests.post(url, files=my_img)
+    # import pdb; pdb.set_trace()
     return response.json()
 
 @app.route('/', methods=['POST'])
 def predict_image():
-    url = BASE_URL + '/api/opencv'
+    url = BASE_URL + '/api/upload'
 
     if request.method == 'POST':
         file = request.files.get('file')
         data = file.filename
         response = send_image_req(url,data)
-
         saved = response['saved']
-
+        
         if saved:
             flash('Yey image successfully uploaded and predicted. Result shows below')
-            return redirect(url_for('display', messages=json.dumps(response)))
+            return redirect(url_for('home'))
         else:    
             flash('Nothing happens so far')
             return render_template("index.html",)
-    
     return render_template("index.html", message="Your request is not reached")
+
+
+
+# @app.route('/', methods=['POST'])
+# def predict_image():
+#     url = BASE_URL + '/api/opencv'
+
+#     if request.method == 'POST':
+#         file = request.files.get('file')
+#         data = file.filename
+#         response = send_image_req(url,data)
+
+#         saved = response['saved']
+
+#         if saved:
+#             flash('Yey image successfully uploaded and predicted. Result shows below')
+#             return redirect(url_for('display', messages=json.dumps(response)))
+#         else:    
+#             flash('Nothing happens so far')
+#             return render_template("index.html",)
+    
+#     return render_template("index.html", message="Your request is not reached")
 
 @app.route('/display')
 def display():

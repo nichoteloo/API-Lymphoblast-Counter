@@ -11,14 +11,13 @@
     </div>
     <div class="card">
       <div class="card-body text-center">
-        <div class="mb-4">
+        <div class="mb-2">
           <i class="feather icon-unlock auth-icon"></i>
         </div>
         <h3 class="mb-4">Login</h3>
-
         <span class="mb-0 text-muted">
-          {% if msg %} {{ msg | safe }} {% else %} Add your credentials {% endif
-          %}
+          {% if msg %} {{ msg | safe }} {% else %} Login to your account {%
+          endif %}
         </span>
 
         <br />
@@ -31,7 +30,7 @@
             {{ form.username(placeholder="Username", class="form-control") }}
           </div>
 
-          <div class="input-group mb-4">
+          <div class="input-group mb-3">
             {{ form.password(placeholder="Password", class="form-control",
             type="password") }}
           </div>
@@ -50,26 +49,17 @@
           <button
             type="submit"
             name="login"
-            class="btn btn-primary shadow-2 mb-4"
+            class="btn btn-primary shadow-2 mb-3"
           >
             Login
           </button>
         </form>
 
-        <p class="mb-0 text-muted">
+        <p class="mb-1 text-muted">
           Don’t have an account?
           <a href="{{ url_for('base_blueprint.register') }}">Signup</a>
         </p>
         <br />
-        <p class="mb-2 text-muted">
-          &copy;
-          <a target="_blank" href="https://bit.ly/37fF9RT">CodedThemes</a> -
-          <a
-            target="_blank"
-            href="https://appseed.us/admin-dashboards/flask-dashboard-dattaable"
-            >Flask Datta Able</a
-          >.
-        </p>
       </div>
     </div>
   </div>

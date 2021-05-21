@@ -1,18 +1,16 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
-
+import json
+import requests
 from app.home import blueprint
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
 
+BASE_URL = 'http://127.0.0.1:8000'
+
 @blueprint.route('/index')
 @login_required
 def index():
-
     return render_template('index.html', segment='index')
 
 @blueprint.route('/<template>')
@@ -50,3 +48,43 @@ def get_segment( request ):
 
     except:
         return None  
+
+def send_image_req(url,data):
+    my_img = {'file': open(data, 'rb')}
+    response = requests.post(url, files=my_img)
+    return response.json()
+
+@blueprint.route('/select.html', methods=['POST'])
+def upload_img():
+    if request.method == 'POST':
+        upload = request.files.get('file')
+        data = file.filename
+        response = send_image_req(url,data)
+
+@blueprint.route('/uploaded.html', methods=['POST'])
+def predict_image():
+    url = BASE_URL + '/api/opencv'
+
+    if request.method == 'POST':
+        file = request.files.get('file')
+        data = file.filename
+        response = send_image_req(url,data)
+
+        saved = response['saved']
+
+        if saved:
+            flash('Yey image successfully uploaded and predicted. Result shows below')
+            return redirect(url_for('display', messages=json.dumps(response)))
+        else:    
+            flash('Nothing happens so far')
+            return render_template("upload.html",)
+    
+    return render_template("upload.html", message="Your request is not reached")
+
+def display():
+    messages = json.loads(request.args['messages'])
+    upload_path = BASE_URL + messages['upload_path']
+    result_path = BASE_URL + messages['result_path']
+    extract_paths = list(map(BASE_URL.__add__, messages['extract_path']))
+    return render_template('result.html', upload_path=upload_path, extract_paths=extract_paths, result_path=result_path)
+   

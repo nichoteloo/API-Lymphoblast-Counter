@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %} {% block title %} Result In One {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/chart-morris/css/morris.css"
+/>
+
+{% endblock stylesheets %} {% block content %}
+
+<div class="pcoded-content">
+  <div class="pcoded-inner-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h5 class="m-b-10">Result In One Image</h5>
+            </div>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/"><i class="feather icon-home"></i></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:">Output Image</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:">Result In One</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="main-body">
+      <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <p>
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul>
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+          </p>
+          <!-- [ Morris Chart ] start -->
+          <div class="col-xl-6">
+            <div class="card">
+              <div class="card-header">
+                <h5>Uploaded Image</h5>
+              </div>
+              {% if upload_path %} 
+              <div class="card-block">
+                <img src="{{ upload_path }}" style="height: 300px" width="500"/>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="card">
+              <div class="card-header">
+                <h5>Output Image in One</h5>
+              </div>
+              {% if result_path %} 
+              <div class="card-block">
+                <img src="{{ result_path }}" style="height: 300px" width="500"/>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <!-- [ Morris Chart ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script src="/static/assets/plugins/chart-morris/js/raphael.min.js"></script>
+<script src="/static/assets/plugins/chart-morris/js/morris.min.js"></script>
+<script src="/static/assets/js/pages/chart-morris-custom.js"></script>
+
+{% endblock javascripts %}

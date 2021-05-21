@@ -1,0 +1,7 @@
+## development
+## make debug to true
+export FLASK_ENV=development
+
+## production
+## make debug to false
+export FLASK_ENV=production

@@ -16,6 +16,14 @@
               <li>{{ message }}</li>
             {% endfor %}
             </ul>
+            
+            <form action="/display" method="POST">
+            <dl>
+                <p>
+                    <input type="submit" value="Predict" class="btn btn-info">
+                </p>
+            </dl>
+            </form>
           {% endif %}
         {% endwith %}
     </p>
@@ -36,12 +44,6 @@
             <input type="submit" value="Submit" class="btn btn-info">
         </p>
     </form>
-
-    {% if filename %}
-        <div>
-            <img src="{{ url_for('display_image', filename=filename) }}">
-        </div>
-    {% endif %}
 </div>
 </div>
 <script>
