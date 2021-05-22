@@ -15,7 +15,7 @@ def handle_upload(file, dest, dest_len=None, save=True, return_img_path=False):
 
         new_filename = f"{dest_len + 1}{ext}" # set new filename
         save_path = os.path.join(dest, new_filename)
-
+        
         if save == True:
             file.save(save_path)
 

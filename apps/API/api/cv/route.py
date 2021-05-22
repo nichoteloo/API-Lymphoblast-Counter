@@ -19,12 +19,14 @@ def devel_cv_upload():
 		extract_paths, result_paths, extract_len = faces_extract(img, save=True, extract=EXTRACT_DIR, result=RESULTS_DIR)
 		truncated_extract_path = []
 		for path in extract_paths:
-			filename = path.replace(EXTRACT_DIR + f'/Extract_{extract_len}', '')
-			extract_url = url_for('serve_extract', extract_len=extract_len, filename=filename)
+			# filename = path.replace(EXTRACT_DIR + f'/Extract_{extract_len}', '')
+			extract_name = os.path.basename(path)
+			extract_url = url_for('serve_extract', extract_len=extract_len, filename=extract_name)
 			truncated_extract_path.append(extract_url) ## relative path to the root
 		
-		temp_result_path = result_paths.replace(RESULTS_DIR, '')
-		truncated_result_path = url_for('serve_result', filename=temp_result_path)
+		# temp_result_path = result_paths.replace(RESULTS_DIR, '')
+		result_name = os.path.basename(result_paths)
+		truncated_result_path = url_for('serve_result', filename=result_name)
 		# import pdb;pdb.set_trace()
 		return {"extract_path": truncated_extract_path, "result_path":truncated_result_path}, 201
 
