@@ -8,6 +8,12 @@ UPLOAD_DIR = os.path.join(BASE_DIR, "storage", "uploads")
 EXTRACT_DIR = os.path.join(BASE_DIR, "storage", "extract")
 RESULTS_DIR = os.path.join(BASE_DIR, "storage", "results")
 
+WORKSPACE_PATH = os.path.join(BASE_DIR, "Tensorflow", "workspace")
+ANNOTATION_PATH = os.path.join(WORKSPACE_PATH, "annotations")
+MODEL_PATH = os.path.join(WORKSPACE_PATH, "models")
+CONFIG_PATH = os.path.join(MODEL_PATH, "my_ssd_mobnet")
+CHECKPOINT_PATH = os.path.join(MODEL_PATH, "my_ssd_mobnet", "bagus versi ssd 1")
+
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 for d in [UPLOAD_DIR, RESULTS_DIR, EXTRACT_DIR]:
