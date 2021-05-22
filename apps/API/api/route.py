@@ -1,7 +1,14 @@
 import os
-from flask import send_from_directory, request
-from api import app
+from flask import send_from_directory, request, url_for
+from api import app, UPLOAD_DIR
 from .utils import handle_upload
+
+@app.route("/storage/uploads")
+def list_upload():
+    list_of_files = {}
+    for filename in os.listdir(UPLOAD_DIR):
+        list_of_files[filename] = UPLOAD_DIR + f"/{filename}"
+    return list_of_files
 
 @app.route("/storage/uploads/<filename>")
 def serve_upload(filename):
@@ -23,8 +30,11 @@ def api_upload():
         dest_folder = app.config['UPLOAD_FOLDER']
         dest_len = len(os.listdir(dest_folder))
         response, img_path, status = handle_upload(file, dest_folder, dest_len, return_img_path=True)
-        return {"saved": response['saved'], "img_path":img_path}, 201
+        temp_upload_path = img_path.replace(UPLOAD_DIR, '')
+        relative_path = url_for('serve_upload', filename=temp_upload_path)
+        return {"saved": response['saved'], "relative_path":relative_path}, 201
     return {"detail":"Upload failed"}, 400
+
 
 
 

@@ -16,7 +16,6 @@ def index():
 @blueprint.route('/<template>')
 @login_required
 def route_template(template):
-
     try:
 
         if not template.endswith( '.html' ):
@@ -64,22 +63,20 @@ def upload_img():
 @blueprint.route('/uploaded.html', methods=['POST'])
 def predict_image():
     url = BASE_URL + '/api/opencv'
-
     if request.method == 'POST':
         file = request.files.get('file')
         data = file.filename
         response = send_image_req(url,data)
-
         saved = response['saved']
+        relative_path = BASE_URL + response['relative_path']
 
         if saved:
             flash('Yey image successfully uploaded and predicted. Result shows below')
-            return redirect(url_for('display', messages=json.dumps(response)))
+            return render_template('uploaded.html', relative_path=relative_path)
         else:    
             flash('Nothing happens so far')
-            return render_template("upload.html",)
-    
-    return render_template("upload.html", message="Your request is not reached")
+            return render_template("select.html",)
+    return render_template("select.html", message="Your request is not reached")
 
 def display():
     messages = json.loads(request.args['messages'])

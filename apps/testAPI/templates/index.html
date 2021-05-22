@@ -8,6 +8,7 @@
 <div class="container">
 <div class="row" align="center" >
     <h2>Select a file to upload</h2>
+   
     <p>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -17,13 +18,26 @@
             {% endfor %}
             </ul>
             
-            <form action="/display" method="POST">
+            {% if relative_path %} 
+            <a href="/" align="align-right">Back Home / Change Image</a>
+            <div align="center">
+            <h3>Uploaded Image</h3>
+            <img src="{{ relative_path }}" width="500"/>
+            </div>
+            <hr>
+            <form action="/predict" method="POST">
             <dl>
+                <p>
+                    <input type="hidden" name="relative_path" value="{{relative_path}}">
+                </p>
                 <p>
                     <input type="submit" value="Predict" class="btn btn-info">
                 </p>
             </dl>
             </form>
+            {% endif %}
+
+            
           {% endif %}
         {% endwith %}
     </p>
