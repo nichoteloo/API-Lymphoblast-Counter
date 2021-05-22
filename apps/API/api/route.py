@@ -30,6 +30,7 @@ def api_upload():
         dest_folder = app.config['UPLOAD_FOLDER']
         dest_len = len(os.listdir(dest_folder))
         response, img_path, status = handle_upload(file, dest_folder, dest_len, return_img_path=True)
+        import pdb;pdb.set_trace()
         temp_upload_path = img_path.replace(UPLOAD_DIR, '')
         relative_path = url_for('serve_upload', filename=temp_upload_path)
         return {"saved": response['saved'], "relative_path":relative_path}, 201
