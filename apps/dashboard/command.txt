@@ -1,6 +1,6 @@
 ##### Linux
 ##export app
-export FLASK_APP = run.py
+export FLASK_APP=run.py
 
 ## development
 ## make debug to true
@@ -14,7 +14,7 @@ export FLASK_ENV=production
 
 ##### Windows
 ##set app
-set FLASK_APP = run.py
+set FLASK_APP=run.py
 
 ## development
 ## make debug to true
