@@ -28,5 +28,5 @@ app.config['RESULTS_DIR'] = RESULTS_DIR
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-from .route import *
-from .cv.route import *
+from .routes import *
+from .cv.routes import *

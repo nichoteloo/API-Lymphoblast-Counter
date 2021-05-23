@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %} {% block title %} Upload Image {% endblock %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+{% block stylesheets %} {% endblock stylesheets %} {% block content %}
 
 <div class="pcoded-content">
   <div class="pcoded-inner-content">
@@ -39,7 +39,7 @@
                 <h5>Upload Image</h5>
               </div>
               <div class="card-body">
-                <h5>Below is list of image you already upload</h5>
+                <h5>Below is list of image you have already uploaded. Select image to process.</h5>
                 <p>
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -52,27 +52,48 @@
                     {% endwith %}
                 </p>
                 <hr />
-                <div class="row">
-                  <div class="col-md-6">
-                    {% if relative_path %} 
-                    <div align="center">
-                      <h3>Uploaded Image</h3>
-                      <img src="{{ relative_path }}" width="500"/>
+                  {% if recent_path %} 
+                    <div class="card" align="center" style="width: 20rem;">
+                        <img class="card-img-top" src="{{ recent_path }}" width="400"/>
+                        <form action="/preprocess" align="center" method="POST">
+                          <dl>
+                              <p>Image {{recent_path}}</p>
+                              <p>
+                                  <input type="hidden" name="recent_path" value="{{recent_path}}">
+                              </p>
+                              <p>
+                                  <input type="submit" value="Process Directly" name="process_direct" class="btn btn-primary">
+                                  <input type="submit" value="Close" name="close" class="btn btn-secondary">
+                              </p>
+                          </dl>
+                        </form>
+                      </div>
+                  {% endif %}
+                  <div class="container">
+                    <div class="row">
+                      {% for upload in list_upload %}
+                      <div class="col-sm-4">
+                        <div class="card-columns-fluid">
+                          <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" src="{{ upload }}" width="400"/>
+                            <form action="/preprocess" align="center" method="POST">
+                              <dl>
+                                  <p>Image {{upload}}</p>
+                                  <p>
+                                      <input type="hidden" name="upload_path" value="{{upload}}">
+                                  </p>
+                                  <p>
+                                      <input type="submit" value="Process" name="process" class="btn btn-primary">
+                                      <input type="submit" value="Delete" name="delete" class="btn btn-danger">
+                                  </p>
+                              </dl>
+                            </form>
+                          </div>
+                        </div>    
+                      </div>
+                      {% endfor %}
                     </div>
-                    <hr>
-                    <form action="/predict" method="POST">
-                      <dl>
-                          <p>
-                              <input type="hidden" name="relative_path" value="{{relative_path}}">
-                          </p>
-                          <p>
-                              <input type="submit" value="Predict" class="btn btn-info">
-                          </p>
-                      </dl>
-                    </form>
-                    {% endif %}
                   </div>
-                </div>
               </div>
             </div>
           </div>
