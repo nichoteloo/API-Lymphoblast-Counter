@@ -1,3 +1,7 @@
+##### Linux
+##export app
+export FLASK_APP = run.py
+
 ## development
 ## make debug to true
 export FLASK_ENV=development
@@ -5,3 +9,25 @@ export FLASK_ENV=development
 ## production
 ## make debug to false
 export FLASK_ENV=production
+
+
+
+##### Windows
+##set app
+set FLASK_APP = run.py
+
+## development
+## make debug to true
+set FLASK_ENV=development
+
+## production
+## make debug to false
+set FLASK_ENV=production
+
+
+
+##### START
+flask run --host=0.0.0.0 --port=5000
+
+
+

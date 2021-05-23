@@ -4,3 +4,9 @@ find setup.py in research/object_detection/packages/tf2/
 run "python setup.py build"
 run "python setup.py install"
 try go with it
+
+# identik req hatma
+pycocotools==2.0.2
+
+# identik req nico
+pycocotools-windows==2.0.0.2
