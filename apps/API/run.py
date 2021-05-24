@@ -1,3 +1,4 @@
+### for production use gunicorn command instead
 import os
 from api import app
 

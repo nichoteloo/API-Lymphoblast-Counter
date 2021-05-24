@@ -48,14 +48,13 @@ def send_image_req(url,data):
 def serve_endpoint(endpoint):
     return BASE_URL + endpoint
 
-
 ## routing functions
 @blueprint.route('/uploaded.html', methods=['GET','POST'])
 def upload_img():
     if request.method == 'POST':
         file = request.files.get('file')
         data = file.filename
-        response = send_image_req(serve_endpoint('/devel/api/upload'),data)
+        response = send_image_req(serve_endpoint('/api/upload'),data)
         saved = response['saved']
         recent_path = serve_endpoint(response['recent_upload'])
         list_upload = [serve_endpoint(x) for x in response['list_upload'].values()]
@@ -94,19 +93,28 @@ def preprocess_img():
 @blueprint.route('/result-one.html', methods=['POST'])
 def process_result():
     if request.method == 'POST':
-        if 'process' in request.form:
+        if ('process' in request.form) or ('process_direct' in request.form):
             filename = os.path.basename(request.form.get('upload_path'))
-            response = requests.get(serve_endpoint(f'/devel2/api/opencv/{filename}')).json()
+
+            response = requests.get(serve_endpoint(f'/api/result/opencv/{filename}')).json()
+
             result_path = serve_endpoint(response["result_path"])
+            basename_res = os.path.basename(result_path)
             upload_path = serve_endpoint(f"/storage/uploads/{filename}")
-            return render_template('result-one.html', upload_path=upload_path, result_path=result_path)
+            basename_up = os.path.basename(upload_path)
+
+            return render_template('result-one.html', upload_path=upload_path, result_path=result_path, basename_res=basename_res, basename_up=basename_up)
 
 @blueprint.route('/extracted.html', methods=['POST'])
 def extract_result():
     if request.method == 'POST':
         if 'extract' in request.form:
             filename = os.path.basename(request.form.get('upload_path'))
-            response = requests.get(serve_endpoint(f'/devel2/api/opencv/{filename}')).json()
-            extract_path = [BASE_URL+x for x in response["extract_path"]]
+
+            response = requests.get(serve_endpoint(f'/api/extract/opencv/{filename}')).json()
+
+            extract_paths = [BASE_URL+x for x in response["extract_paths"]]
             upload_path = serve_endpoint(f"/storage/uploads/{filename}")
-            return render_template('extracted.html', upload_path=upload_path, extract_path=extract_path)
+            basename_up = os.path.basename(upload_path)
+            # import pdb;pdb.set_trace()
+            return render_template('extracted.html', upload_path=upload_path, extract_paths=extract_paths, basename_up=basename_up)

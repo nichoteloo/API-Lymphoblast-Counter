@@ -55,32 +55,42 @@
             </p>
             <!-- [ Morris Chart ] start -->
             {% if upload_path %}
-            <div class="card" align="center" style="width: 20rem;">
-              <div class="card-header">
-                  <h5>Image {{upload_path}}</h5>
-              </div>
-              <div class="card-block">
-                <img class="card-img-top" src="{{ recent_path }}" width="400"/>
-              </div>
-            </div>
-            {% endif %}
-            
-            <div class="card-header">
-                <h5>Extracted Image</h5>
-            </div>
-            {% if extract_path %} 
-            {% for extract in extract_path %}
-            <div class="col-sm-3">
-              <div class="card-columns-fluid">
+            <div class="container">
+              <div class="row justify-content-center">
                 <div class="card" style="width: 20rem;">
-                  <img class="card-img-top" src="{{ upload }}" width="400"/>
-                  <b align="center">Image {{upload}}</b>
+                    <div class="card-header">
+                        <h5>Image {{basename_up}}</h5>
+                    </div>
+                    <div class="card-block">
+                      <img class="card-img-top" src="{{ upload_path }}" width="400"/>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row justify-content-center">
+                  <div class="card" style="width: 40rem;">
+                    <div class="card-header" align="center">
+                        <h5>Please select uploaded image at first</h5>
+                    </div>
+                </div>
                 </div>
               </div>
             </div>
-            {% endfor %}
-            {% else %}
-            <h5 align="center">Please select uploaded email first</h5>
+            {% endif %}
+            {% if extract_paths %}
+            <hr>
+            <div class="container">
+              <div class="row">
+                {% for extract in extract_paths %}
+                <div class="col-sm-3">
+                    <div class="card-columns-fluid">
+                      <div class="card-body" style="width: 15rem;">
+                        <img class="card-img-top" src="{{ extract }}"/>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
             {% endif %}
             <!-- [ Morris Chart ] end -->
           </div>

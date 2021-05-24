@@ -18,17 +18,17 @@
             {% endfor %}
             </ul>
             
-            {% if relative_path %} 
+            {% if recent_upload %} 
             <a href="/" align="align-right">Back Home / Change Image</a>
             <div align="center">
             <h3>Uploaded Image</h3>
-            <img src="{{ relative_path }}" width="500"/>
+            <img src="{{ recent_upload }}" width="500"/>
             </div>
             <hr>
             <form action="/predict" method="POST">
             <dl>
                 <p>
-                    <input type="hidden" name="relative_path" value="{{relative_path}}">
+                    <input type="hidden" name="recent_upload" value="{{recent_upload}}">
                 </p>
                 <p>
                     <input type="submit" value="Predict" class="btn btn-info">

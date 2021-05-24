@@ -60,9 +60,12 @@
               {% if upload_path %} 
               <div class="card-block">
                 <img src="{{ upload_path }}" style="height: 400px" width="450"/>
+                <b align="center">Image {{basename_up}}</b>
               </div>
               {% else %}
-              <h5 align="center">Please select uploaded email first</h5>
+              <div class="card-header" align="center">
+                  <h5>Please select uploaded image at first</h5>
+              </div>
               {% endif %}
             </div>
           </div>
@@ -74,9 +77,12 @@
               {% if result_path %} 
               <div class="card-block">
                 <img src="{{ result_path }}" style="height: 400px" width="450"/>
+                <b align="center">Image {{basename_res}}</b>
               </div>
               {% else %}
-              <h5 align="center">Please select uploaded email first</h5>
+              <div class="card-header" align="center">
+                  <h5>Please select uploaded image at first</h5>
+              </div>
               {% endif %}
             </div>
           </div>
@@ -85,7 +91,7 @@
             <div class="container-fluid">
               <div class="row justify-content-center">
                 <form action="/extracted.html", method="POST">
-                  <input type="hidden" value="{{ upload_path }}">
+                  <input type="hidden" value="{{ upload_path }}" name="upload_path">
                   <input type="submit" value="Extract" name="extract" class="btn btn-dark btn-sm">
                 </form>
               </div>
