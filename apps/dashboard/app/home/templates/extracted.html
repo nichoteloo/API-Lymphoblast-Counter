@@ -1,0 +1,103 @@
+{% extends "layouts/base.html" %} {% block title %} Result In One {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+
+<link
+  rel="stylesheet"
+  href="/static/assets/plugins/chart-morris/css/morris.css"
+/>
+
+{% endblock stylesheets %} {% block content %}
+
+<div class="pcoded-content">
+  <div class="pcoded-inner-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h5 class="m-b-10">Extracted Images</h5>
+            </div>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/"><i class="feather icon-home"></i></a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:">Output Image</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="javascript:">Extracted Images</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="main-body">
+      <div class="page-wrapper">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <div class="col-sm-12">
+            <h5>Below is result of the extracted images.</h5>
+            <p>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </p>
+            <!-- [ Morris Chart ] start -->
+            {% if upload_path %}
+            <div class="card" align="center" style="width: 20rem;">
+              <div class="card-header">
+                  <h5>Image {{upload_path}}</h5>
+              </div>
+              <div class="card-block">
+                <img class="card-img-top" src="{{ recent_path }}" width="400"/>
+              </div>
+            </div>
+            {% endif %}
+            
+            <div class="card-header">
+                <h5>Extracted Image</h5>
+            </div>
+            {% if extract_path %} 
+            {% for extract in extract_path %}
+            <div class="col-sm-3">
+              <div class="card-columns-fluid">
+                <div class="card" style="width: 20rem;">
+                  <img class="card-img-top" src="{{ upload }}" width="400"/>
+                  <b align="center">Image {{upload}}</b>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5 align="center">Please select uploaded email first</h5>
+            {% endif %}
+            <!-- [ Morris Chart ] end -->
+          </div>
+        </div>
+        <!-- [ Main Content ] end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script src="/static/assets/plugins/chart-morris/js/raphael.min.js"></script>
+<script src="/static/assets/plugins/chart-morris/js/morris.min.js"></script>
+<script src="/static/assets/js/pages/chart-morris-custom.js"></script>
+
+{% endblock javascripts %}

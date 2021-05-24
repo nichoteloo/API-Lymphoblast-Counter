@@ -1,7 +1,8 @@
-{% extends "layouts/base.html" %} {% block title %} Upload Image {% endblock %}
+{% extends "layouts/base.html" %} {% block title %} Uploaded Images {% endblock %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %} {% endblock stylesheets %} {% block content %}
+{% block stylesheets %} 
+{% endblock stylesheets %} {% block content %}
 
 <div class="pcoded-content">
   <div class="pcoded-inner-content">
@@ -11,7 +12,7 @@
         <div class="row align-items-center">
           <div class="col-md-12">
             <div class="page-header-title">
-              <h5 class="m-b-10">Upload Image</h5>
+              <h5 class="m-b-10">Uploaded Images</h5>
             </div>
             <ul class="breadcrumb">
               <li class="breadcrumb-item">
@@ -21,7 +22,7 @@
                 <a href="javascript:">Input Image</a>
               </li>
               <li class="breadcrumb-item">
-                <a href="javascript:">Upload Image</a>
+                <a href="javascript:">Uploaded Images</a>
               </li>
             </ul>
           </div>
@@ -36,7 +37,7 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h5>Upload Image</h5>
+                <h5>Uploaded Images</h5>
               </div>
               <div class="card-body">
                 <h5>Below is list of image you have already uploaded. Select image to process.</h5>
@@ -52,48 +53,52 @@
                     {% endwith %}
                 </p>
                 <hr />
-                  {% if recent_path %} 
-                    <div class="card" align="center" style="width: 20rem;">
-                        <img class="card-img-top" src="{{ recent_path }}" width="400"/>
-                        <form action="/preprocess" align="center" method="POST">
-                          <dl>
-                              <p>Image {{recent_path}}</p>
-                              <p>
-                                  <input type="hidden" name="recent_path" value="{{recent_path}}">
-                              </p>
-                              <p>
-                                  <input type="submit" value="Process Directly" name="process_direct" class="btn btn-primary">
-                                  <input type="submit" value="Close" name="close" class="btn btn-secondary">
-                              </p>
-                          </dl>
-                        </form>
+                {% if recent_path %} 
+                  <div class="card" align="center" style="width: 20rem;">
+                      <img class="card-img-top" src="{{ recent_path }}" width="400"/>
+                      <b align="center">Image {{recent_path}}</b>
+                      <br>
+                      <div class="container-fluid">
+                        <div class="row justify-content-center">
+                          <form action="/result-one.html" align="center" method="POST">
+                            <input type="hidden" name="recent_path" value="{{recent_path}}">
+                            <input type="submit" value="Process Directly" name="process_direct" class="btn btn-primary btn-sm">
+                          </form>
+                          <form action="/preprocess" align="center" method="POST">
+                            <input type="hidden" name="recent_path" value="{{recent_path}}">
+                            <input type="submit" value="Close" name="close" class="btn btn-secondary btn-sm">
+                          </form>
+                        </div>
                       </div>
-                  {% endif %}
-                  <div class="container">
-                    <div class="row">
-                      {% for upload in list_upload %}
-                      <div class="col-sm-4">
-                        <div class="card-columns-fluid">
-                          <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" src="{{ upload }}" width="400"/>
-                            <form action="/preprocess" align="center" method="POST">
-                              <dl>
-                                  <p>Image {{upload}}</p>
-                                  <p>
-                                      <input type="hidden" name="upload_path" value="{{upload}}">
-                                  </p>
-                                  <p>
-                                      <input type="submit" value="Process" name="process" class="btn btn-primary">
-                                      <input type="submit" value="Delete" name="delete" class="btn btn-danger">
-                                  </p>
-                              </dl>
-                            </form>
-                          </div>
-                        </div>    
-                      </div>
-                      {% endfor %}
                     </div>
+                {% endif %}
+                <div class="container">
+                  <div class="row">
+                    {% for upload in list_upload %}
+                    <div class="col-sm-4">
+                      <div class="card-columns-fluid">
+                        <div class="card" style="width: 20rem;">
+                          <img class="card-img-top" src="{{ upload }}" width="400"/>
+                          <b align="center">Image {{upload}}</b>
+                          <br>
+                          <div class="container-fluid">
+                            <div class="row justify-content-center">
+                              <form action="/result-one.html" method="POST">
+                                <input type="hidden" name="upload_path" value="{{upload}}">
+                                <input type="submit" value="Process" name="process" class="btn btn-primary btn-sm">
+                              </form>
+                              <form action="/preprocess" method="POST">
+                                <input type="hidden" name="upload_path" value="{{upload}}">
+                                <input type="submit" value="Delete" name="delete" class="btn btn-danger btn-sm">
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>    
+                    </div>
+                    {% endfor %}
                   </div>
+                </div>
               </div>
             </div>
           </div>

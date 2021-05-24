@@ -5,6 +5,25 @@ from api import app, allowed_file, UPLOAD_DIR, EXTRACT_DIR, RESULTS_DIR
 from api.utils import handle_upload
 from .utils import load_image, faces_extract
 
+
+@app.route('/devel2/api/opencv/<filename>', methods=['GET','POST'])
+def devel_cv_upload_2(filename):
+	if request.method == 'GET':
+		img_path = UPLOAD_DIR + f"/{filename}"
+		img = load_image(img_path)
+
+		extract_paths, result_paths, extract_len = faces_extract(img, save=True, extract=EXTRACT_DIR, result=RESULTS_DIR)
+		truncated_extract_path = []
+		for path in extract_paths:
+			extract_name = os.path.basename(path)
+			extract_url = url_for('serve_extract', extract_len=extract_len, filename=extract_name)
+			truncated_extract_path.append(extract_url) ## relative path to the root
+		
+		result_name = os.path.basename(result_paths)
+		truncated_result_path = url_for('serve_result', filename=result_name)
+		return {"extract_path": truncated_extract_path, "result_path":truncated_result_path}, 201
+
+
 @app.route('/devel/api/opencv', methods=['POST'])
 def devel_cv_upload():
 	if request.method == 'POST':
