@@ -39,7 +39,7 @@
                 <h5>Select Image</h5>
               </div>
               <div class="card-body">
-                <h5>Select an image file to upload</h5>
+                <h6>Select an image file to upload</h6>
                 <p>
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -53,20 +53,18 @@
                 </p>
                 <hr />
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                       <form id="form1" method="POST" action="/uploaded.html" enctype="multipart/form-data">
-                        <dl>
+                        <dl align="center">
                             <p>
                                 <input type="file"  accept="image/*" name="file" id="file" onchange="loadFile(event)" style="display: none;" required>
+                                <label for="file" class="bg-secondary" style="cursor: pointer; width:100px;height:22px;border:1px solid #000; color: white">Upload Image</label>
                             </p>
                             <p>
-                                <label for="file" style="cursor: pointer; width:100px;height:22px;border:1px solid #000;">Upload Image</label>
-                            </p>
-                            <p>
-                                <img id="output" width="300" />
+                                <img id="output" width="400" />
                             </p>
                         </dl>
-                        <p>
+                        <p align="right">
                             <input type="submit" value="Upload" class="btn btn-primary">
                         </p>
                     </form>

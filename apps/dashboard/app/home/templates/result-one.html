@@ -59,13 +59,16 @@
               </div>
               {% if upload_path %} 
               <div class="card-block">
-                <img src="{{ upload_path }}" style="height: 400px" width="450"/>
-                <b align="center">Image {{basename_up}}</b>
+                <div class="row justify-content-center"><img src="{{ upload_path }}" style="height: 400px" width="400"/></div>
+                <br>
+                <div class="row justify-content-center"><b align="center">Image {{basename_up}}</b></div>
               </div>
               {% else %}
-              <div class="card-header" align="center">
-                  <h5>Please select uploaded image at first</h5>
+              <br>
+              <div class="row justify-content-center">
+                <h4>Please select uploaded image at first</h4>
               </div>
+              <br>
               {% endif %}
             </div>
           </div>
@@ -76,13 +79,16 @@
               </div>
               {% if result_path %} 
               <div class="card-block">
-                <img src="{{ result_path }}" style="height: 400px" width="450"/>
-                <b align="center">Image {{basename_res}}</b>
+                <div class="row justify-content-center"><img src="{{ result_path }}" style="height: 400px" width="400"/></div>
+                <br>
+                <div class="row justify-content-center"><b align="center">Image {{basename_res}}</b></div>
               </div>
               {% else %}
-              <div class="card-header" align="center">
-                  <h5>Please select uploaded image at first</h5>
+              <br>
+              <div class="row justify-content-center">
+                <h4>Please select uploaded image at first</h4>
               </div>
+              <br>
               {% endif %}
             </div>
           </div>

@@ -40,7 +40,7 @@
                 <h5>Uploaded Images</h5>
               </div>
               <div class="card-body">
-                <h5>Below is list of image you have already uploaded. Select image to process.</h5>
+                <h6>Below is list of image you have already uploaded. Select image to process.</h6>
                 <p>
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -54,9 +54,11 @@
                 </p>
                 <hr />
                 {% if recent_path %} 
-                  <div class="card" align="center" style="width: 20rem;">
-                      <img class="card-img-top" src="{{ recent_path }}" width="400"/>
-                      <b align="center">Image {{recent_path}}</b>
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="card" style="width: 30rem;">
+                      <img class="card-img-top" src="{{ recent_path }}" width="50"/>
+                      <b align="center">Image {{truncated_filename}}</b>
                       <br>
                       <div class="container-fluid">
                         <div class="row justify-content-center">
@@ -64,13 +66,18 @@
                             <input type="hidden" name="recent_path" value="{{recent_path}}">
                             <input type="submit" value="Process Directly" name="process_direct" class="btn btn-primary btn-sm">
                           </form>
+                          <form action="/select.html">
+                              <input type="submit" class="btn btn-secondary btn-sm" value="Select Image Again" />
+                          </form>
                           <form action="/preprocess" align="center" method="POST">
                             <input type="hidden" name="recent_path" value="{{recent_path}}">
-                            <input type="submit" value="Close" name="close" class="btn btn-secondary btn-sm">
+                            <input type="submit" value="Close" name="close" class="btn btn-warning btn-sm">
                           </form>
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
                 {% endif %}
                 <div class="container">
                   <div class="row">
@@ -78,17 +85,17 @@
                     <div class="col-sm-4">
                       <div class="card-columns-fluid">
                         <div class="card" style="width: 20rem;">
-                          <img class="card-img-top" src="{{ upload }}" width="400"/>
-                          <b align="center">Image {{upload}}</b>
+                          <img class="card-img-top" src="{{ upload[1] }}" width="400"/>
+                          <b align="center">Image {{ upload[0] }}</b>
                           <br>
                           <div class="container-fluid">
                             <div class="row justify-content-center">
                               <form action="/result-one.html" method="POST">
-                                <input type="hidden" name="upload_path" value="{{upload}}">
+                                <input type="hidden" name="upload_path" value="{{ upload[1] }}">
                                 <input type="submit" value="Process" name="process" class="btn btn-primary btn-sm">
                               </form>
                               <form action="/preprocess" method="POST">
-                                <input type="hidden" name="upload_path" value="{{upload}}">
+                                <input type="hidden" name="upload_path" value="{{ upload[1] }}">
                                 <input type="submit" value="Delete" name="delete" class="btn btn-danger btn-sm">
                               </form>
                             </div>

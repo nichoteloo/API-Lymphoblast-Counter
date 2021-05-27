@@ -2,7 +2,17 @@
 endblock %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+{% block stylesheets %}
+<style type="text/css">
+ .tab { margin-left: 40px; }
+ .tab-two {margin-left: 16px;
+            margin-right: -150px;}
+ .card-header {margin-bottom: -30px;}
+ .card-footer {margin-bottom: -30px;
+              margin-top: -15px;}
+ .medical { margin-right: 80px }
+</style>
+{% endblock stylesheets %} {% block content %}
 
 <div class="pcoded-content">
   <div class="pcoded-inner-content">
@@ -34,10 +44,96 @@ endblock %}
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h5>What is Lymphoblast Counter ?</h5>
+                <h4>What is Lymphoblast Counter ?</h4>
               </div>
-              <div class="card-block">
-                <p>Descibe backbone of our project.</p>
+              <div class="card-body">
+                <div class="col-md-12">
+                  <p><h5><b>Lymbhoblast Counter for Assisting Hematologist Initial Screening on Diagnosing Leukemia.</b></h5></p>
+                  <p class="text-dark">Hematologists use manual microscopic examination for initial screening because it is the most economical way (for now) with potential human-errors of 30-40% and subjective reports [8,10].</p>
+                </div>
+                <div class="row">
+                  <div class="col-md-8 tab-two">
+                    <p class="text-dark">There are numbers of consequences that possible to appears including: 
+                      <li class="tab text-dark">Human-error increasing with time due to fatigue [10].</li>
+                      <li class="tab text-dark">Manual examination would be bias and subjective reports [8].</li></p>
+                    <p class="text-dark">These consequences above deduce to the following questions: 
+                      <li class="tab text-dark">Would machine learning approach improve hematologists initial screening ?</li>
+                      <li class="tab text-dark">Which approach be the most economical way ?</li></p>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <img src="/static/assets/images/img_1.jpg" width="200px" height="160px" />
+                        <b>Before Processed</b>
+                      </div>
+                      <div class="col-md-2"></div>
+                      <div class="col-md-5">
+                        <img src="/static/assets/images/img_2.jpg" width="200px" height="160px" />
+                        <b>After Processed</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="col-sm-12">
+                  <p>[8] Referensi mana bos<br>[10] Referensi mana bos</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h4>Project Objective</h4>
+              </div>
+              <div class="card-body">
+                <p><h5><b>Incorporate machine learning to be able to help hematologist for initial screening on diagnosing leukimia.</b></h5></p>
+                <p class="text-dark">The machine learning model we proposed able to classify between blast and nonblast cell properly. We use pre-trained MobileNet SSD V2 model with open source data as data training for our model.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h4>Team Members</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="container col-md-12">
+                    <div class="col-md-1">
+                      <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="" width="400"/>
+                        <b align="center">Anggota 1</b>
+                      </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1">
+                      <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="" width="400"/>
+                        <b align="center">Anggota 1</b>
+                      </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1">
+                      <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="" width="400"/>
+                        <b align="center">Anggota 1</b>
+                      </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1">
+                      <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="" width="400"/>
+                        <b align="center">Anggota 1</b>
+                      </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1">
+                      <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="" width="400"/>
+                        <b align="center">Anggota 1</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
               </div>
             </div>
           </div>

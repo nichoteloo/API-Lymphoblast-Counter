@@ -50,29 +50,38 @@ def serve_endpoint(endpoint):
 
 ## routing functions
 @blueprint.route('/uploaded.html', methods=['GET','POST'])
+@login_required
 def upload_img():
     if request.method == 'POST':
         file = request.files.get('file')
         data = file.filename
         response = send_image_req(serve_endpoint('/api/upload'),data)
         saved = response['saved']
+
         recent_path = serve_endpoint(response['recent_upload'])
+        truncated_recent = os.path.basename(recent_path)
+
+        
         list_upload = [serve_endpoint(x) for x in response['list_upload'].values()]
+        collection_upload = [[os.path.basename(upload), upload] for upload in list_upload]
+        # import pdb;pdb.set_trace()
 
         if saved:
             flash('Yey image successfully uploaded and predicted. All result shown below')
-            return render_template('uploaded.html', recent_path=recent_path, list_upload=list_upload)
+            return render_template('uploaded.html', recent_path=recent_path, truncated_recent=truncated_recent, list_upload=collection_upload)
         else:    
             flash('Nothing happens so far')
             return render_template("select.html")
     elif request.method == 'GET':
         response = requests.get(serve_endpoint('/storage/uploads')).json()
         list_upload = [serve_endpoint(x) for x in response.values()]
-        return render_template('uploaded.html', list_upload=list_upload)
+        collection_upload = [[os.path.basename(upload), upload] for upload in list_upload]
+        return render_template('uploaded.html', list_upload=collection_upload)
     flash("Your request is not reached")
     return render_template("select.html", messages="Your request is not reached")
 
 @blueprint.route('/preprocess', methods=['POST'])
+@login_required
 def preprocess_img():
     if request.method == 'POST':
         if 'delete' in request.form:
@@ -91,6 +100,7 @@ def preprocess_img():
         return 0
 
 @blueprint.route('/result-one.html', methods=['POST'])
+@login_required
 def process_result():
     if request.method == 'POST':
         if ('process' in request.form) or ('process_direct' in request.form):
@@ -106,6 +116,7 @@ def process_result():
             return render_template('result-one.html', upload_path=upload_path, result_path=result_path, basename_res=basename_res, basename_up=basename_up)
 
 @blueprint.route('/extracted.html', methods=['POST'])
+@login_required
 def extract_result():
     if request.method == 'POST':
         if 'extract' in request.form:

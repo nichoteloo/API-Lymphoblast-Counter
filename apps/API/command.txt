@@ -1,0 +1,28 @@
+create python environment, and activate it
+
+run "pip install -r requirements_with_model_latest.txt"
+
+if any error appears, it may causes from error timeout, because the libraries are too much. solution for this problem is try to re-install it again to complete installation for the remaining libraries. 
+
+if error appears causes from any required module doesn't included properly in txt file, please install it manually by simply "pip install bla bla bla".
+
+after finish installation, then;
+
+run "protoc object_detection/protos/*.proto --python_out=."   # within TensorFlow/models/research/ folder
+run "python setup.py build"
+run "python setup.py install"
+try to go with it (see if there is an error or not)
+
+if there's any check through pyhon shell these following library;
+
+-from object_detection.utils import label_map_util
+-from object_detection.utils import visualization_utils as viz_utils
+-from object_detection.builders import model_builder
+-from object_detection.utils import config_util
+-from object_detection.protos import pipeline_pb2
+-from google.protobuf import text_format
+
+if all of them succeed imported, then the script should be fine
+
+demo for real use case in runtime application will be shown at the video
+
