@@ -2,7 +2,7 @@ import os
 from api import allowed_file
 from werkzeug.utils import secure_filename
 
-def handle_upload(file, dest, dest_len=None, save=True, return_img_path=False):
+def handle_upload(file, dest, save=True, return_img_path=False):
     """
     func: image handling
     input: file, destination folder, amount of dir in destination folder, save condition, return img path condition
@@ -16,16 +16,13 @@ def handle_upload(file, dest, dest_len=None, save=True, return_img_path=False):
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename) # security purpose
-        _, ext = os.path.splitext(filename) # take extension
+        save_path = os.path.join(dest, f"{filename}")
 
-        new_filename = f"{dest_len + 1}{ext}" # set new filename
-        save_path = os.path.join(dest, new_filename)
-        
         if save == True:
             file.save(save_path)
 
             if return_img_path == True:
-                return {"saved": True}, save_path, 5211
+                return {"saved": True, "save_path":save_path}, 201
 
             return {"saved": True}, 201
     else:

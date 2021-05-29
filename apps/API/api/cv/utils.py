@@ -77,10 +77,8 @@ class LymphoCounterModel:
 												min_score_thresh=.5,
 												agnostic_mode=False)
 
-        # print(image_np_with_detections)
-
-        result_len = len(os.listdir(result)) + 1
-        result_paths = os.path.join(result, f"{result_len}.jpg")
+        basename_res = os.path.basename(self.image_path)
+        result_paths = os.path.join(result, f"{basename_res}")
         status = cv2.imwrite(result_paths, image_np_with_detections)
 
         return result_paths
@@ -110,7 +108,7 @@ class LymphoCounterModel:
 # 	frame = cv2.imread(image_path)
 # 	return frame
 
-# def faces_extract(frame, extract=True, result=True, extract_dir=None, result_dir=None):
+# def faces_extract(frame, filename=None, extract=True, result=True, extract_dir=None, result_dir=None):
 # 	"""
 # 	func: main process, from preprocess up to giving result
 # 	input: frame img, save extract img or not, save result img or not, extract dir path, result dir path
@@ -142,9 +140,14 @@ class LymphoCounterModel:
 # 			extract_paths.append(current_path)
 
 # 	if result == True and result_dir != None:
-# 		result_len = len(os.listdir(result_dir)) + 1
-# 		result_paths = os.path.join(result_dir, f"{result_len}.jpg")
-# 		status = cv2.imwrite(result_paths, frame)
-# 		return result_paths
+# 		if filename == None:
+# 			result_len = len(os.listdir(result_dir)) + 1
+# 			result_paths = os.path.join(result_dir, f"{result_len}.jpg")
+# 			status = cv2.imwrite(result_paths, frame)
+# 			return result_paths
+# 		else:
+# 			result_paths = os.path.join(result_dir, f"{filename}")
+# 			status = cv2.imwrite(result_paths, frame)
+# 			return result_paths
 
 # 	return extract_paths, extract_len

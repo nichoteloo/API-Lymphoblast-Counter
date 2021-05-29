@@ -59,12 +59,12 @@ def api_upload():
         ## save to upload directory
         file = request.files.get("file")
         dest_folder = app.config['UPLOAD_FOLDER']
-        dest_len = len(os.listdir(dest_folder))
-        response, img_path, status = handle_upload(file, dest_folder, dest_len, return_img_path=True)
-        jpgname = os.path.basename(img_path)
+        response, status = handle_upload(file, dest_folder, return_img_path=True)
+        # import pdb; pdb.set_trace()
+        jpgname = os.path.basename(response['save_path'])
         recent_upload = url_for('serve_upload', filename=jpgname)
         list_upload = list_upload_file()
-        return {"saved": response['saved'], "recent_upload":recent_upload, "list_upload": list_upload}, 201
+        return {"saved": response['saved'], "recent_upload":recent_upload, "list_upload": list_upload}, status
     return {"detail":"Upload failed"}, 400
 
 @app.route('/api/delete_upload/<filename>', methods=['GET'])

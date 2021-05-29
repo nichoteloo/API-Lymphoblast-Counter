@@ -13557,7 +13557,8 @@ div.code-toolbar > .toolbar span:hover {
   -webkit-animation: pulse 2s infinite;
   animation: pulse 2s infinite;
   border-radius: 0.25rem;
-  /*display: none;*/
+  display: none;
+  visibility: hidden;
 }
 
 .fixed-button .btn {
@@ -13568,26 +13569,30 @@ div.code-toolbar > .toolbar span:hover {
   text-transform: capitalize;
   font-weight: bold;
   font-size: 16px;
-  /*display: none;*/
+  display: none !important;
+  visibility: hidden;
 }
 
 .fixed-button .btn:hover {
   background: #79b530;
   border: none;
   border-bottom: 2px solid #5e8d25;
-  /*display: none;*/
+  display: none !important;
+  visibility: hidden;
 }
 
 .fixed-button:hover {
   -webkit-animation: none;
   animation: none;
-  /*display: none;*/
+  display: none;
+  visibility: hidden;
 }
 
 .fixed-button.active {
   bottom: 50px;
   opacity: 1;
-  /*display: none;*/
+  display: none !important;
+  visibility: hidden;
 }
 
 @-webkit-keyframes pulse {

@@ -81,7 +81,7 @@
               <div class="card-block">
                 <div class="row justify-content-center"><img src="{{ result_path }}" style="height: 400px" width="400"/></div>
                 <br>
-                <div class="row justify-content-center"><b align="center">Image {{basename_res}}</b></div>
+                <div class="row justify-content-center"><b align="center">Result {{basename_res}}</b></div>
               </div>
               {% else %}
               <br>
@@ -96,10 +96,15 @@
           {% if upload_path or result_path %}
             <div class="container-fluid">
               <div class="row justify-content-center">
-                <form action="/extracted.html", method="POST">
+                <!-- <form action="/extracted.html", method="POST">
                   <input type="hidden" value="{{ upload_path }}" name="upload_path">
                   <input type="submit" value="Extract" name="extract" class="btn btn-dark btn-sm">
-                </form>
+                </form> -->
+                <!-- <form action="/pdf.html", method="POST">
+                  <input type="hidden" value="{{ upload_path }}" name="upload_path">
+                  <input type="hidden" value="{{ result_path }}" name="result_path">
+                  <input type="submit" value="Make PDF" name="makePdf" class="btn btn-primary btn-sm">
+                </form> -->
               </div>
             </div>
           {% endif %}

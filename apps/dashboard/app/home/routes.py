@@ -23,7 +23,7 @@ def route_template(template):
         # Detect the current page
         segment = get_segment( request )
         # Serve the file (if exists) from app/templates/FILE.html
-        return render_template( template, segment=segment )
+        return render_template( template, segment=segment)
     except TemplateNotFound:
         return render_template('page-404.html'), 404
     except:
@@ -68,17 +68,17 @@ def upload_img():
 
         if saved:
             flash('Yey image successfully uploaded and predicted. All result shown below')
-            return render_template('uploaded.html', recent_path=recent_path, truncated_recent=truncated_recent, list_upload=collection_upload)
+            return render_template('uploaded.html', recent_path=recent_path, truncated_recent=truncated_recent, list_upload=collection_upload, segment='uploaded')
         else:    
             flash('Nothing happens so far')
-            return render_template("select.html")
+            return render_template("select.html", segment='select')
     elif request.method == 'GET':
         response = requests.get(serve_endpoint('/storage/uploads')).json()
         list_upload = [serve_endpoint(x) for x in response.values()]
         collection_upload = [[os.path.basename(upload), upload] for upload in list_upload]
-        return render_template('uploaded.html', list_upload=collection_upload)
+        return render_template('uploaded.html', list_upload=collection_upload, segment='uploaded')
     flash("Your request is not reached")
-    return render_template("select.html", messages="Your request is not reached")
+    return render_template("select.html", messages="Your request is not reached", segment='select')
 
 @blueprint.route('/preprocess', methods=['POST'])
 @login_required
@@ -89,13 +89,13 @@ def preprocess_img():
             response = requests.get(serve_endpoint(f'/api/delete_upload/{filename}')).json()
             if response['delete']:
                 list_upload = [serve_endpoint(x) for x in response["list_upload"].values()]
-                render_template("uploaded.html", messages=f"Image {filename} success deleted", list_upload=list_upload)
+                render_template("uploaded.html", messages=f"Image {filename} success deleted", list_upload=list_upload, segment='uploaded')
                 flash(f"Image {filename} success deleted")
                 return redirect(url_for('home_blueprint.upload_img'))
         elif 'close' in request.form:
             response = requests.get(serve_endpoint('/storage/uploads')).json()
             list_upload = [serve_endpoint(x) for x in response.values()]
-            render_template('uploaded.html', list_upload=list_upload)
+            render_template('uploaded.html', list_upload=list_upload, segment='uploaded')
             return redirect(url_for('home_blueprint.upload_img'))
         return 0
 
@@ -103,17 +103,19 @@ def preprocess_img():
 @login_required
 def process_result():
     if request.method == 'POST':
-        if ('process' in request.form) or ('process_direct' in request.form):
+        if ('process' in request.form):
             filename = os.path.basename(request.form.get('upload_path'))
+        elif ('process_direct' in request.form):
+            filename = os.path.basename(request.form.get('recent_path'))
 
-            response = requests.get(serve_endpoint(f'/api/result/opencv/{filename}')).json()
+        response = requests.get(serve_endpoint(f'/api/result/opencv/{filename}')).json()
 
-            result_path = serve_endpoint(response["result_path"])
-            basename_res = os.path.basename(result_path)
-            upload_path = serve_endpoint(f"/storage/uploads/{filename}")
-            basename_up = os.path.basename(upload_path)
+        result_path = serve_endpoint(response["result_path"])
+        basename_res = os.path.basename(result_path)
+        upload_path = serve_endpoint(f"/storage/uploads/{filename}")
+        basename_up = os.path.basename(upload_path)
 
-            return render_template('result-one.html', upload_path=upload_path, result_path=result_path, basename_res=basename_res, basename_up=basename_up)
+        return render_template('result-one.html', upload_path=upload_path, result_path=result_path, basename_res=basename_res, basename_up=basename_up, segment='result-one')
 
 @blueprint.route('/extracted.html', methods=['POST'])
 @login_required
@@ -128,4 +130,17 @@ def extract_result():
             upload_path = serve_endpoint(f"/storage/uploads/{filename}")
             basename_up = os.path.basename(upload_path)
             # import pdb;pdb.set_trace()
-            return render_template('extracted.html', upload_path=upload_path, extract_paths=extract_paths, basename_up=basename_up)
+            return render_template('extracted.html', upload_path=upload_path, extract_paths=extract_paths, basename_up=basename_up, segment='extracted')
+
+# @blueprint.route('/pdf.html', methods=['POST'])
+# def pdf_generator():
+#     if request.method == 'POST':
+#         upload_path = request.form.get('upload_path')
+#         result_path = request.form.get('result_path')
+
+#         basename_up = os.path.basename(upload_path)
+#         basename_res = os.path.basename(result_path)
+
+#         res = render_template('pdf.html', upload_path=upload_path, result_path=result_path, basename_res=basename_res, basename_up=basename_up)
+
+#         return render_pdf(HTML(string=res))

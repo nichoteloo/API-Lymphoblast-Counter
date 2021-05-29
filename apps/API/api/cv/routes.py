@@ -39,34 +39,41 @@ def result_one_img(filename):
 # 		img_path = UPLOAD_DIR + f"/{filename}"
 # 		img = load_image(img_path)
 
-# 		result_paths = faces_extract(img, extract=False, result=True, result_dir=RESULTS_DIR)
+# 		result_paths = faces_extract(img, filename=filename, extract=False, result=True, result_dir=RESULTS_DIR)
 		
 # 		result_name = os.path.basename(result_paths)
 # 		truncated_result_path = url_for('serve_result', filename=result_name)
 # 		return {"result_path":truncated_result_path}, 201
 
 
-@app.route('/api/extract/opencv/<filename>', methods=['GET'])
-def extract_image(filename):
-	"""
-    func: process to extracted images
-    input: filename for upload folder
-    output: api call line from extracted image folder
-    """
-	if request.method == 'GET':
-		img_path = UPLOAD_DIR + f"/{filename}"
-		img = load_image(img_path)
+
+########################################################################
+########################## Not used ####################################
+########################################################################
+
+# @app.route('/api/extract/opencv/<filename>', methods=['GET'])
+# def extract_image(filename):
+# 	"""
+#     func: process to extracted images
+#     input: filename for upload folder
+#     output: api call line from extracted image folder
+#     """
+# 	if request.method == 'GET':
+# 		img_path = UPLOAD_DIR + f"/{filename}"
+# 		img = load_image(img_path)
 		
-		extract_paths, extract_len = faces_extract(img, extract=True, result=False, extract_dir=EXTRACT_DIR)
+# 		extract_paths, extract_len = faces_extract(img, extract=True, result=False, extract_dir=EXTRACT_DIR)
 
-		truncated_extract_path = []
-		for path in extract_paths:
-			extract_name = os.path.basename(path)
-			extract_url = url_for('serve_extract', extract_len=extract_len, filename=extract_name)
-			truncated_extract_path.append(extract_url) ## relative path to the root
-		return {"extract_paths": truncated_extract_path}, 201
-
-
+# 		truncated_extract_path = []
+# 		for path in extract_paths:
+# 			extract_name = os.path.basename(path)
+# 			extract_url = url_for('serve_extract', extract_len=extract_len, filename=extract_name)
+# 			truncated_extract_path.append(extract_url) ## relative path to the root
+# 		return {"extract_paths": truncated_extract_path}, 201
+		
+########################################################################
+########################## Not used ####################################
+########################################################################
 		
 		
 
