@@ -1,16 +1,5 @@
 FROM python:3.8.5
 
-WORKDIR /app
-
-COPY requirements_api.txt .
-RUN pip install --no-cache-dir -r requirements_api.txt
-
-COPY run.py .
-
-WORKDIR /app/api
-
-COPY /app/ .
-
 # Install system dependencies with OpenCV
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tzdata \
@@ -29,7 +18,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-CMD [ "python", "run.py" ]
+RUN mkdir /app
+WORKDIR /app
+COPY requirements_api.txt .
+RUN pip install --no-cache-dir -r requirements_api.txt
+
+COPY run.py .
+
+RUN mkdir /app/api
+WORKDIR /app/api
+COPY /api/ .
+
+WORKDIR /app
+
+EXPOSE 8000
+
+ENV FLASK_APP=run.py
+
+CMD ["flask", "run", "--host", "0.0.0.0","--port","8000"]
 
 ## DEBUGGING
 ## sudo docker run -it --entrypoint /bin/bash <ImageID>
