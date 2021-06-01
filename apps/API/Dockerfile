@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install --upgrade pip 
+
 RUN mkdir /app
 WORKDIR /app
 COPY requirements_api.txt .
@@ -31,11 +33,11 @@ COPY /api/ .
 
 WORKDIR /app
 
-EXPOSE 8000
+# EXPOSE 8000
+# ENV FLASK_APP=run.py
+# CMD ["flask", "run", "--host", "0.0.0.0","--port","8000"]
 
-ENV FLASK_APP=run.py
-
-CMD ["flask", "run", "--host", "0.0.0.0","--port","8000"]
+CMD gunicorn api.wsgi:app --bind 0.0.0.0:$PORT
 
 ## DEBUGGING
 ## sudo docker run -it --entrypoint /bin/bash <ImageID>
