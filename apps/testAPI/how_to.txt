@@ -1,8 +1,0 @@
-establish environment
-activate it
-
-build file .env
-write down "SECRET_KEY=E9Sdkjg3wUgngckGVkNjJLXWgHVFtlTN" (not use quotes symbol)
-
-run 'pip install -r requirements_test.txt'
-run 'python client.py'
