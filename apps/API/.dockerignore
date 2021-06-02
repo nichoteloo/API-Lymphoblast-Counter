@@ -2,6 +2,11 @@ __pycache__
 venv
 1.6.7
 command.txt
+requirements_api.txt
 requirements_with_model_latest.txt
-requirements_with_models.txt
-run.sh
+run.py
+app.yaml
+heroku.txt
+heroku.yml
+app.yaml
+gunicorn.txt

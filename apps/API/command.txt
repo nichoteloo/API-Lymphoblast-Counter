@@ -9,8 +9,8 @@ if error appears causes from any required module doesn't included properly in tx
 after finish installation, then;
 
 run "protoc object_detection/protos/*.proto --python_out=."   # within TensorFlow/models/research/ folder
-run "python setup.py build"
-run "python setup.py install"
+run "python -m pip install ."
+
 try to go with it (see if there is an error or not)
 
 if there's any check through pyhon shell these following library;
