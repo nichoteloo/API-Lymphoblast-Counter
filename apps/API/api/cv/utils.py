@@ -74,7 +74,7 @@ class LymphoCounterModel:
 												category_index,
 												use_normalized_coordinates=True,
 												max_boxes_to_draw=20,
-												min_score_thresh=.5,
+												min_score_thresh=.75,
 												agnostic_mode=False)
 
         basename_res = os.path.basename(self.image_path)
