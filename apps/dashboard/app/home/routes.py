@@ -7,7 +7,7 @@ from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
 
-BASE_URL = 'https://lymhp-tf.herokuapp.com/'
+BASE_URL = 'https://api-lymphocounter-nzzhike6aa-et.a.run.app'
 
 @blueprint.route('/index')
 @login_required
