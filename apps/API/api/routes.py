@@ -39,15 +39,6 @@ def serve_result(filename):
     """
     return send_from_directory(app.config['RESULTS_DIR'], filename)
 
-@app.route('/storage/extract/<extract_len>/<filename>')
-def serve_extract(extract_len, filename):
-    """
-    func: retrieve extracted images from its directory
-    input: length of extract folder (for update folder name), filename
-    output: api call line for rendering image
-    """
-    return send_from_directory(app.config['EXTRACT_DIR'], f'Extract_{extract_len}/' + filename, mimetype='image/jpg')
-
 @app.route('/api/upload', methods=['POST'])
 def api_upload():
     """

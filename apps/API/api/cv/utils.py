@@ -1,13 +1,6 @@
 import os
 import cv2
 import numpy as np
-
-############################################################################################################
-
-############################################################################################################
-####### Still in development, update soon.
-############################################################################################################
-
 import tensorflow as tf
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as viz_utils
@@ -82,72 +75,3 @@ class LymphoCounterModel:
         status = cv2.imwrite(result_paths, image_np_with_detections)
 
         return result_paths
-
-############################################################################################################
-
-############################################################################################################
-####### Down below only for development process, use face detection model from built in Open Cv2 module
-############################################################################################################
-
-# def get_cascade(cascade_xml='haarcascade_frontalface_default.xml'):
-# 	"""
-# 	func: get classifier model
-# 	input: name of xml param
-# 	output: model object
-# 	"""
-# 	cascade_path = os.path.join(cv2.data.haarcascades, cascade_xml)
-# 	cascade = cv2.CascadeClassifier(cascade_path)
-# 	return cascade
-
-# def load_image(image_path):
-# 	"""
-# 	func: load image from folder
-# 	input: image path
-# 	output: frame of image (readable)
-# 	"""
-# 	frame = cv2.imread(image_path)
-# 	return frame
-
-# def faces_extract(frame, filename=None, extract=True, result=True, extract_dir=None, result_dir=None):
-# 	"""
-# 	func: main process, from preprocess up to giving result
-# 	input: frame img, save extract img or not, save result img or not, extract dir path, result dir path
-# 	output: image path from respective folder, depends on condition
-# 	"""
-# 	cascade = get_cascade()
-
-# 	## preprocess image from frame
-# 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-# 	faces = cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5, minSize=(30, 30))
-	
-# 	final_dest = None
-# 	if extract_dir != None:
-# 		## check for extract directory
-# 		extract_len = len(os.listdir(extract_dir)) + 1
-# 		final_dest = os.path.join(extract_dir, f"Extract_{extract_len}")
-# 		os.makedirs(final_dest, exist_ok=True)
-
-# 	## bounding box coordinate checking
-# 	extract_paths = [] 
-# 	for i, (x, y, w, h) in enumerate(faces):
-# 		## create bounding box
-# 		cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
-# 		## for counter
-# 		roi_color = frame[y:y+h, x:x+w]
-# 		if extract == True:
-# 			current_path = os.path.join(final_dest, f"{i+1}.jpg")
-# 			cv2.imwrite(current_path, roi_color)
-# 			extract_paths.append(current_path)
-
-# 	if result == True and result_dir != None:
-# 		if filename == None:
-# 			result_len = len(os.listdir(result_dir)) + 1
-# 			result_paths = os.path.join(result_dir, f"{result_len}.jpg")
-# 			status = cv2.imwrite(result_paths, frame)
-# 			return result_paths
-# 		else:
-# 			result_paths = os.path.join(result_dir, f"{filename}")
-# 			status = cv2.imwrite(result_paths, frame)
-# 			return result_paths
-
-# 	return extract_paths, extract_len
