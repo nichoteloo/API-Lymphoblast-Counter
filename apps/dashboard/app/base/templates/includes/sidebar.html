@@ -34,8 +34,7 @@
           class="nav-item {% if 'select' in segment %} active {% endif %}"
         >
           <a href="/select.html" class="nav-link"
-            ><span class="pcoded-micon"
-              ><i class="feather icon-image"></i></span
+            ><span class="pcoded-micon"><i class="feather icon-image"></i></span
             ><span class="pcoded-mtext">Select Image</span></a
           >
         </li>
@@ -44,8 +43,7 @@
           class="nav-item {% if 'uploaded' in segment %} active {% endif %}"
         >
           <a href="/uploaded.html" class="nav-link"
-            ><span class="pcoded-micon"
-              ><i class="feather icon-film"></i></span
+            ><span class="pcoded-micon"><i class="feather icon-film"></i></span
             ><span class="pcoded-mtext">Uploaded Images</span></a
           >
         </li>
@@ -54,19 +52,7 @@
         </li>
         <li
           data-username="Charts Morris"
-          class="
-            nav-item
-            {%
-            if
-            'result-one'
-            in
-            segment
-            %}
-            active
-            {%
-            endif
-            %}
-          "
+          class="nav-item {% if 'result-one' in segment %} active {% endif %}"
         >
           <a href="/result-one.html" class="nav-link"
             ><span class="pcoded-micon"
@@ -74,28 +60,6 @@
             ><span class="pcoded-mtext">Result In One</span></a
           >
         </li>
-        <!-- <li
-          data-username="Charts Morris"
-          class="
-            nav-item
-            {%
-            if
-            'extracted'
-            in
-            segment
-            %}
-            active
-            {%
-            endif
-            %}
-          "
-        >
-          <a href="/extracted.html" class="nav-link"
-            ><span class="pcoded-micon"
-              ><i class="feather icon-layers"></i></span
-            ><span class="pcoded-mtext">Extracted Images</span></a
-          >
-        </li> -->
         <li class="nav-item pcoded-menu-caption">
           <label>Account</label>
         </li>

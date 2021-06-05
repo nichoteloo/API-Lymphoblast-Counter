@@ -5,7 +5,6 @@ endblock %}
 {% block stylesheets %}
 <style type="text/css">
  .tab { margin-left: 40px; }
- .tab-img {margin-left: 10px;}
  .tab-two {margin-left: 16px;
             margin-right: -150px;}
  .card-header {margin-bottom: -30px;}
@@ -17,17 +16,20 @@ endblock %}
 
 <div class="pcoded-content">
   <div class="pcoded-inner-content">
+    
     <!-- [ breadcrumb ] start -->
     <div class="page-header">
       <div class="page-block">
         <div class="row align-items-center">
           <div class="col-md-12">
+            <a id="mobile-collapse1" href="javascript:"><span><i class="feather icon-home"></i> Menu </span></a>
+            <p></p>
             <div class="page-header-title">
               <h5 class="m-b-10">Lymphoblast Counter</h5>
             </div>
             <ul class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/"><i class="feather icon-home"></i></a>
+                <a href="/"><i class="feather icon-airplay"></i></a>
               </li>
               <li class="breadcrumb-item">
                 <a href="javascript:">Lymphoblast Counter</a>
@@ -44,6 +46,7 @@ endblock %}
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
+              
               <div class="card-header">
                 <h4>What is Lymphoblast Counter ?</h4>
               </div>
@@ -68,7 +71,7 @@ endblock %}
                         <p><b>Before Computed</b></p>
                       </div>
                       <div class="col-md-1"></div>
-                      <div class="col-md-5 tab-img">
+                      <div class="col-md-5">
                         <img src="/static/assets/images/img_2.JPG" width="180px" height="160px" />
                         <p><b>After Computed</b></p>
                       </div>
@@ -90,7 +93,11 @@ endblock %}
               </div>
               <div class="card-body">
                 <p><h5><b>Incorporate machine learning to be able to help hematologist for initial screening on diagnosing leukimia.</b></h5></p>
-                <p class="text-dark">The machine learning model we proposed able to classify between blast and nonblast cell properly. We use pre-trained SSD ResNet50 V1 FPN 640x640  (RetinaNet50) model with open source data as data training for our model.</p>
+                <p class="text-dark">The machine learning model that 
+                  we proposed is able to facilitate doctors, hematologists, or other medical officers,
+                  in order to classifying blast and nonblast cell correctly. 
+                  We use pre-trained SSD ResNet50 V1 FPN 640x640 (RetinaNet50) model and ALL-IDB public 
+                  limited dataset as our training data.</p>
               </div>
             </div>
           </div>

@@ -2,6 +2,9 @@
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %} 
+<style>
+.marg-top {margin-top: -15px;}
+</style>
 {% endblock stylesheets %} {% block content %}
 
 <div class="pcoded-content">
@@ -11,12 +14,14 @@
       <div class="page-block">
         <div class="row align-items-center">
           <div class="col-md-12">
+            <a id="mobile-collapse1" href="javascript:"><span><i class="feather icon-home"></i> Menu </span></a>
+            <p></p>
             <div class="page-header-title">
               <h5 class="m-b-10">Uploaded Images</h5>
             </div>
             <ul class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/"><i class="feather icon-home"></i></a>
+                <a href="/"><i class="feather icon-film"></i></a>
               </li>
               <li class="breadcrumb-item">
                 <a href="javascript:">Input Image</a>
@@ -39,8 +44,9 @@
               <div class="card-header">
                 <h5>Uploaded Images</h5>
               </div>
-              <div class="card-body">
+              <div class="card-body marg-top">
                 <h6>Below is list of image you have already uploaded. Select image to process.</h6>
+                <p style="color:red">[Due to some sort of ordinances, we can't show all the images from the dataset because it's public limited. Please try the following instead.]</p>
                 <p>
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
