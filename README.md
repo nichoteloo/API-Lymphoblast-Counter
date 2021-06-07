@@ -9,8 +9,6 @@ There are two main repo inside folder /apps; API and dashboard
 
 API ---- this contains API configuration.
 
-Command:
-
 ------------------- For development -----------------------------
 
 - build environment
@@ -45,8 +43,6 @@ another deployment method
 dashboard ---- this contains Web App configuration.
 This application is supported by open source dashboard config app-seed.
 
-Command:
-
 ------------------- For development -----------------------------
 
 - build environment
@@ -63,8 +59,4 @@ Command:
 
 Attachment
 
-![alt text](https://github.com/nichoteloo/API_lymphoblast_devel/tree/main/apps/dashboard/screenshot/1.JPG)
-![alt text](https://github.com/nichoteloo/API_lymphoblast_devel/tree/main/apps/dashboard/screenshot/2.JPG)
-![alt text](https://github.com/nichoteloo/API_lymphoblast_devel/tree/main/apps/dashboard/screenshot/3.JPG)
-![alt text](https://github.com/nichoteloo/API_lymphoblast_devel/tree/main/apps/dashboard/screenshot/4.JPG)
-![alt text](https://github.com/nichoteloo/API_lymphoblast_devel/tree/main/apps/dashboard/screenshot/5.JPG)
+Web Apps Demo (https://youtu.be/SNL4r8WSQws)
