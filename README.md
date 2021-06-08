@@ -7,7 +7,7 @@ There are two main repo inside folder /apps; API and dashboard
 
 ################################################################
 
-API ---- this contains API configuration.
+## API ---- this contains API configuration.
 
 ------------------- For development -----------------------------
 
@@ -40,7 +40,8 @@ another deployment method
 
 ################################################################
 
-dashboard ---- this contains Web App configuration.
+## dashboard ---- this contains Web App configuration.
+
 This application is supported by open source dashboard config app-seed.
 
 ------------------- For development -----------------------------
@@ -57,13 +58,13 @@ This application is supported by open source dashboard config app-seed.
 
 ################################################################
 
-Attachment
+## Attachment
 
-## Propose Scheme
+### Propose Scheme
 
 ![](apps/screenshot/scheme.png)
 
-## List of API Endpoints
+### List of API Endpoints
 
 ![](apps/screenshot/endpoint.jpg)
 
