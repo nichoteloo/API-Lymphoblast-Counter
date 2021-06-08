@@ -59,4 +59,12 @@ This application is supported by open source dashboard config app-seed.
 
 Attachment
 
+## Propose Scheme
+
+![](apps/screenshot/scheme.png)
+
+## List of API Endpoints
+
+![](apps/screenshot/endpoint.jpg)
+
 Web Apps Demo (https://youtu.be/SNL4r8WSQws)
