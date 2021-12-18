@@ -7,9 +7,9 @@ There are two main repo inside folder /apps; API and dashboard
 
 ################################################################
 
-## API ---- this contains API configuration.
+### API ---- this contains API configuration.
 
-------------------- For development -----------------------------
+** For development **
 
 - build environment
 - activate environment
